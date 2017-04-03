@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <title>Elm Ports Todo Example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script type="text/javascript" src="elm.js"></script>
+    <script>
+        const stateLocation = 'state';
+
+        var storedState = localStorage.getItem(stateLocation);
+
+        var app = Elm.Main.fullscreen();
+
+        if (storedState !== undefined)
+            app.ports.storageInput.send(JSON.parse(storedState));
+
+        app.ports.storageOutput.subscribe(function(currentState) {
+            localStorage.setItem(stateLocation, JSON.stringify(currentState));
+        });
+
+        //window.app = app;
+    </script>
+</body>
+
+</html>
